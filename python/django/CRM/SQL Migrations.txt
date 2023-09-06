@@ -1,0 +1,52 @@
+python manage.py check [nombreapp]
+python manage.py makemigrations  #return number of migration ex. 0001
+python manage.py sqlmigrate [nombreapp] [numbermigration]
+python manage.py migrate
+
+python manage.py shell
+from [subcarpeta].models import [nombreBD]
+
+insert registro:
+var = [nombretabla]([columna1]=[valor1],...,[columnan]=[valorn])
+var.save()
+or 
+var = [nombretabla].objects.create([columna1]=[valor1],...,[columnan]=[valorn])
+
+update registro:
+var.[columna]=[valor]
+var.save()
+
+delete registro:
+var = [nombretabla].objects.get([criterio ex. columna = valor])
+var.delete
+
+select all registro:
+varList = [nombretabla].objects.all()
+varList.query.__str__() #muestra el query select
+
+select where registro:
+[nombretabla].objects.filter([criterio ex. columna = valor],...,[criterio n])
+or
+[nombretabla].objects.filter([criterio ex. columna = valor],...,[criterio n]).order_by([columna]) #asc
+or
+[nombretabla].objects.filter([criterio ex. columna = valor],...,[criterio n]).order_by(-[columna]) #desc
+
+criterios:
+[columna]__gte = [number]
+[columna]__lte = [number]
+[columna]__range([val1],[val2])
+
+/**********CHECK EMPTY QUERY********/
+queryset = demo.objects.filter(name="non_existent_name")
+
+if queryset.exists():
+    serializer = DemoSerializer(queryset, many=True)
+    return Response(serializer.data)
+else:
+    return Response(status=status.HTTP_404_NOT_FOUND)
+/**********************************/
+
+
+
+
+
